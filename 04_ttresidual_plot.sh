@@ -1,7 +1,9 @@
 #!/bin/bash
-### Script:  11_residual_plot.sh
-### Purpose: Plot traveltime residuals change along offset
-### Author: S.Y. LAI 2025
+### Script:  04_ttresidual_plot.sh
+### Purpose: Plot progression of traveltime residuals and inversion statistics against profile distance
+### Author: S.Y. LAI
+
+
 
 if [ $# -eq 0 ]; then
     echo "Error: No arguments provided."
@@ -32,7 +34,7 @@ pick_refrtt=${invdir}/pick_refr_tt
 
 
 #########################
-### forward modelling
+### run forward modelling
 #########################
 ### ttfile format: distance(km),time(s)
 ### final model
