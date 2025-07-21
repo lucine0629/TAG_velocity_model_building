@@ -1,5 +1,5 @@
 #!/bin/csh -f
-## Script: 02_run_inversio.sh
+## Script: 02_run_inversion.sh
 ## Purpose: Run tomo2d inversion of the traveltime picks to generate the best-fitting velocity model
 ## Author: S.Y. Lai
 
