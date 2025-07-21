@@ -1,5 +1,8 @@
 #!/bin/csh -f
-# do_inv.sh
+## Script: 02_run_inversio.sh
+## Purpose: Run tomo2d inversion of the traveltime picks to generate the best-fitting velocity model
+## Author: S.Y. Lai
+
 
 if ($#argv != 2) then
     echo "needs two arg";
