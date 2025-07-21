@@ -1,5 +1,5 @@
 #!/bin/bash
-## this script adds gaussian noise to the traveltime picks
+## Add gaussian random noise to the traveltime picks
 
 noise=13_Gaussian_noise.txt
 tt=tt_"$1".dat
@@ -9,10 +9,6 @@ tmpfile=noise.txt
 outfile=chk_obs_tt_"$1".dat
 
 rm $tmpfile $outfile
-
-
-
-
 paste $tt $oritt $noise > $tmpfile
 
 awk '{
