@@ -1,7 +1,7 @@
-### Script:  03_reduced_tt.py
-### Purpose: Prepare for traveltime pick file for TOMO2D
+### Script:  01_tomo2d_traveltime_format.py
+### Purpose: Prepare for traveltime pick file to run TOMO2D velocity modelling
 ###          (1) Reduced to observed traveltime file
-###          (2) Prepare the file
+###          (2) Formatting the file
 ###
 ### Author:  S.Y. Lai
 
@@ -13,11 +13,11 @@
 import pandas as pd
 import os
 
-
-# out_dir = 'C:/Users/syll1n21/Documents/Python_Scripts/sem4/line01/refl_traveltime/'
 out_dir = 'C:/Users/syll1n21/Documents/Python_Scripts/sem4/line03/'
 
-### read files
+###############################
+### ASSIGN HEADER INFORMATION
+###############################
 sn = 2
 ## line01
 # obxseq = [2, 4, 10, 12, 14, 16]
@@ -35,9 +35,10 @@ obx_dep = obxdepth[sn-1]
 print('obx',obx,'offset',off_header,'depth',obx_dep)
 
 
-
+#############################################
+### READ ttpicks stored in the spreadsheet
+#############################################
 sheet = 'obx'+str(obx)+'dc_east'
-
 tmp = pd.read_excel('sem4b_03_traveltime.xlsx', sheet_name=sheet, dtype=str, usecols=["shot","time","error","code"])
 tmp1 = tmp.values.tolist()
 
@@ -57,7 +58,7 @@ print(data1[3])
 
 
 
-### Check existence of output file. If output file exists, remove it.
+### Check existence of the output file. If output file exists, remove it.
 if os.path.isfile(os.path.join(out_dir,output)):
     os.remove(os.path.join(out_dir,output))
     
@@ -65,9 +66,10 @@ if os.path.isfile(os.path.join(out_dir,output)):
     
     
     
-
-#### search the same shot num and assign the shot distance to the corresponding shot num.
-
+###########################################################################################
+#### Loop searching for the same shot number between offset and pick files,
+#### and assign the shot distance to the the traveltime pick entry in TOMO2D format.
+###########################################################################################
 for a, element in enumerate(tmp1):
     shot = tmp1[a]
     shotno = shot[1]
@@ -104,8 +106,9 @@ with open(os.path.join(out_dir,output), 'w') as modified:
 
 
 
-
-                
+###################################
+## print header, number of picks
+###################################
 print(offset, shotdist, redtime, obstt)
 print(a+1,a1, 'travel time picks')
 
